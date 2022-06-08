@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovilPasteleria.MainPage"
+             xmlns:mvvm="clr-namespace:AppMovilPasteleria.ViewModels"  NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <mvvm:VentasPasteleriaViewModel x:Name="bcPasteles"></mvvm:VentasPasteleriaViewModel>
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#BB8E49"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="25"></Setter>
+                <Setter Property="Padding" Value="2"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Orientation="Horizontal" Background="#BB8E49" Grid.ColumnSpan="3">
+            <Label TextColor="White"  Margin="50,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="27" FontAttributes="Bold" FontFamily="Century" CharacterSpacing="1">Control de ventas</Label>
+            <Image Margin="10,0,0,0" HeightRequest="30" WidthRequest="85" Source="control.png"></Image>
+        </StackLayout>
+
+        <StackLayout  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Orientation="Horizontal">
+            <StackLayout.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="16"></Setter>
+                    <Setter Property="WidthRequest" Value="50"></Setter>
+                    <Setter Property="FontFamily" Value="Century"></Setter>
+                    <Setter Property="HeightRequest" Value="30"></Setter>
+                    <Setter Property="TextColor" Value="Black"></Setter>
+                    <Setter Property="FontAttributes" Value="Italic"></Setter>
+                    <Setter Property="CharacterSpacing" Value="0.3"></Setter>
+                </Style>
+                <Style TargetType="Entry">
+                    <Setter Property="WidthRequest" Value="230"></Setter>
+                    <Setter Property="TextColor" Value="Black"></Setter>
+                    <Setter Property="FontSize" Value="13"></Setter>
+                    <Setter Property="HeightRequest" Value="50"></Setter>
+                    <Setter Property="FontFamily" Value="Century"></Setter>
+                    <Setter Property="CharacterSpacing" Value="0.3"/>
+                    <Setter Property="VerticalTextAlignment" Value="End"></Setter>
+                </Style>
+            </StackLayout.Resources>
+            <Label Margin="20,0,0,0"  VerticalOptions="End"   FontSize="18" FontAttributes="Bold" FontFamily="Century">Filtro:</Label>
+            <Entry Text="{Binding Filtro}" Placeholder="Escriba TODOS para ver todas las ventas"></Entry>
+            <Button Command="{Binding FiltarCommand}" CommandParameter="{Binding Filtro}" VerticalOptions="Center" Margin="0,10,0,0" Padding="-20" HeightRequest="30" CornerRadius="30"  Text="&#8981;" WidthRequest="30"></Button>
+        </StackLayout>
+        <StackLayout Grid.Row="2" Grid.ColumnSpan="3">
+            <Label HorizontalTextAlignment="Center" FontFamily="Century" FontAttributes="Italic">Arrastre y suelte en los botones para editar y eliminar</Label>
+        </StackLayout>
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="3" x:Name="cv" ItemsSource="{Binding ListaVentas}" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame BorderColor="#BB8E49" HeightRequest="100">
+                          
+                            <Frame.GestureRecognizers>
+                                <DragGestureRecognizer CanDrag="True" DropCompleted="DragGestureRecognizer_DropCompleted"   DragStarting="DragGestureRecognizer_DragStarting" DragStartingCommand="{Binding Source={x:Reference bcPasteles}, Path=Drag}" DragStartingCommandParameter="{Binding .}"></DragGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout WidthRequest="40">
+                                    <Image VerticalOptions="CenterAndExpand" Source="signoventa.png" WidthRequest="30" HeightRequest="30"></Image>
+                                </StackLayout>
+                                <StackLayout>
+                                       <StackLayout.Resources>
+                                        <Style TargetType="Label">
+                                            <Setter Property="FontSize" Value="16"></Setter>
+                                            <Setter Property="Margin" Value="42,0,0,0"/>
+                                            <Setter Property="FontFamily" Value="Century"></Setter>
+                                            <Setter Property="HeightRequest" Value="30"></Setter>
+                                            <Setter Property="TextColor" Value="Black"></Setter>
+                                            <Setter Property="FontAttributes" Value="Italic"></Setter>
+                                            <Setter Property="CharacterSpacing" Value="0.4"></Setter>
+                                        </Style>
+                                    </StackLayout.Resources>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.RowSpan="4" WidthRequest="350" Aspect="Fill" Source="fondo.png"></Image>
+                                        <Label  Grid.Row="0" Text="{Binding NombrePastel}"></Label>
+                                        <Label Grid.Row="1" Text="{Binding Costo, StringFormat='${0:F2}'}" ></Label>
+                                        <Label Grid.Row="2"  Text="{Binding FechaVenta, StringFormat='{0:D}'}" ></Label>
+                                        <Label  Grid.Row="3" Text="{Binding Sucursal}"></Label>
+                                    </Grid>
+                                 
+                                  
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Margin="0,0,15,150" IsVisible="False" Grid.Row="3" Grid.Column="2"  x:Name="btn1"  Text="&#9997;"  HorizontalOptions="End" VerticalOptions="End" CornerRadius="100" HeightRequest="60" WidthRequest="60">
+
+            <Button.GestureRecognizers>
+                <DropGestureRecognizer  AllowDrop="True" DropCommand="{Binding Source={x:Reference bcPasteles}, Path=VerEditarCommand}" DropCommandParameter="{Binding Pastel}"></DropGestureRecognizer>
+            </Button.GestureRecognizers>
+        </Button>
+        <Button  Margin="0,0,15,60" IsVisible="False" Grid.Row="3"  Grid.Column="2" x:Name="btn2" Text="&#128465;"  HorizontalOptions="End" VerticalOptions="End" CornerRadius="100" HeightRequest="60" WidthRequest="60">
+
+            <Button.GestureRecognizers>
+                <DropGestureRecognizer AllowDrop="True" DropCommand="{Binding Source={x:Reference bcPasteles}, Path=EliminarCommand}" DropCommandParameter="{Binding Pastel}"></DropGestureRecognizer>
+            </Button.GestureRecognizers>
+        </Button>
+        <Button x:Name="btn3" Grid.Row="3" Grid.Column="2" Padding="5" Margin="0,0,15,15" Command="{Binding VerAgregarCommand}" Text="&#10010;" HorizontalOptions="End" VerticalOptions="End" CornerRadius="100" HeightRequest="60" WidthRequest="60">
+        
+        </Button>
+    </Grid>
+</ContentPage>

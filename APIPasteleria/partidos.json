@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "partidosenvivoluiscastilleja",
+  "private_key_id": "843690239b38f66fa1e0a21c016992ca103368f3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCvqq0496oDEgl2\nBiCvNf+tDAELeJhctWnLtpdxcIA+NyqyQDFm7/VijO9dpHNydSsyUKHwdJT4q41R\nNXA+3lAb4qn7eGXeVy+FqUftcsGrc/59r3uwyYrZC9H7lrLlH96WsR5IhY2aJpSl\n25bGKM3vzpBhksXRTUG1N2Yf1hiumAi6W+RgSIPDZiaa1NTEi5nLZMYiTi4TAV4j\nWs2A+fTtUAORHSXDx+RBh3PuCS/KQzCn8ObVd4AqzQ8mNidpvD3rK8HvLAaEOpOz\nf9vO+CxuYHtzu6CBN+z2CLfYfBpTLZlqHF3NrB++dR88BTSCSX3yjlNqjYt8nbqT\nXXH0MWZPAgMBAAECgf989l7uCwd0RCeTP6w5aWk/IkrxT9hoU8F9DINZoQNglBbL\nYVCm6WGJgLhUrBl0Gay9VxCGi0vf0pt78KQ92+fLfKtu/zbNghuFFh+/WHFQhjNK\nisPH/yVUz2kfAb+WWvj85FemlLBDFL0beFMCMj2idk8iqEZJZQE8r2T2lh3cTVWl\n7kH0FwzIuDahFd8rT5mMSlqGG16YYuxVGRdalF+dR/Uu+kEaLHurrkdqIhUa1aP/\nt2Uv9/xX7CTMZq9Eyi+458MwYr9VrKSuCsE05j89s0CgXw3Y2bFBwCKBDj9aBHEI\nUkt0OuL2XdehiEVpLi8VuBA1riQ6LS6F6mBoWoECgYEA3iRbc12g1xieYP2tbdfU\nC8lmQ5UV+OjbhBijSkRiREUM72atL3aAh+NcbyQiFcZLf4I4iNGm22K7XWXO8FxL\n4lkgXPfK2tV0brCUdfOfY9Lp++2UVrlFOWI3Y9EIoMXeqfSMr8qzf2qOFj0PU8XB\nmulaiMiIPkP2lStwdkUFNY8CgYEAynDsbMy/kTKuAPID3eXmbMfjeIEDkHzN96Up\naAx6tYn6RQaanLDz6Xj1g/Om1RzDQbQifitx51l1IQp0H+54dvcg5HF4YGZ9E80B\nv1FyOuYyfEDdO7qmWIXDMF8esu1OmfOhLo++gylf4/tPW5V4/k8oLmJXlxMIMRL5\n7pQP40ECgYAyltsQydjQQ3YGJp9xbX6H9KTKbVBksDsVuTqutiYe4A7TEnIMZhNd\nXwT09qightk4v6I6Xmx+d9ytp3raOFq7wIpjQbc74PK0JpiYyBObezP4QKHQoj7G\nk7yDid5KJuXPlLbZbfM06EJVhDBSZq3xpoUMs4Z7j6S/UfY5qPxHtwKBgQDGVGds\nGBO93pbWWkQriuZ6wEI8drjVP1BSRD8SrtcxL6I/Kb8jr8DmhRiTU4uo0esBXcdF\nMK8A5oV3/1PRTMI8WtSgugIi/4WedoQ1uUdeKNRhIvMbZzs9Ep8trqLWzOLqtOK+\nSRluSoSlSDpxETlefJJzDumdGoo1+c9eSzRdgQKBgGJo5f8KYL/LwEg7LFjuIAZh\nE+LZps9+Eh5ACkO1rqEXayGAioNLHXFoelEJUAAgjUms/ihWoKOXR/JmsVNLSRpt\nmVc1IZaGcXSN9DEySxteyFrGU5zGad+zXrMHu/ozzg7YM+uWGuIjNs4m9T9yObMR\nCduiDG2iIYh5C7ApRPLa\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-2qfua@partidosenvivoluiscastilleja.iam.gserviceaccount.com",
+  "client_id": "118135348953078520924",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2qfua%40partidosenvivoluiscastilleja.iam.gserviceaccount.com"
+}

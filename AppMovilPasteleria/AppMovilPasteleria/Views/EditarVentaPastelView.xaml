@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AppMovilPasteleria.ViewModels"
+             x:DataType="vm:VentasPasteleriaViewModel"
+             xmlns:local="clr-namespace:AppMovilPasteleria.Helpers"
+             x:Class="AppMovilPasteleria.Views.EditarVentaPastelView" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:StringToDecimalConverter x:Key="stringToDecimal"></local:StringToDecimalConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Background="#F3CB92">
+        <StackLayout HeightRequest="80" Orientation="Horizontal" Background="#BB8E49">
+            <Label TextColor="White" CharacterSpacing="1" Margin="80,0,35,0" WidthRequest="240" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="30" FontAttributes="Bold" FontFamily="Century">Editar venta</Label>
+            <Image Margin="0,0,8,0" HeightRequest="30" WidthRequest="50" Source="venta1.png"></Image>
+        </StackLayout>
+        <StackLayout>
+            <StackLayout.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="19"></Setter>
+                    <Setter Property="WidthRequest" Value="100"></Setter>
+                    <Setter Property="FontFamily" Value="Century"></Setter>
+                    <Setter Property="Margin" Value="10,5,0,5"></Setter>
+                    <Setter Property="HeightRequest" Value="50"></Setter>
+                    <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                    <Setter Property="FontAttributes" Value="Italic"></Setter>
+                    <Setter Property="CharacterSpacing" Value="0.2"></Setter>
+                    <Setter Property="TextColor" Value="Black"></Setter>
+                </Style>
+                <Style TargetType="Entry">
+                    <Setter Property="WidthRequest" Value="220"></Setter>
+                    <Setter Property="VerticalOptions" Value="Center"></Setter>
+                    <Setter Property="TextColor" Value="Black"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="FontFamily" Value="Century"></Setter>
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="WidthRequest" Value="150"></Setter>
+                    <Setter Property="HeightRequest" Value="50"></Setter>
+                    <Setter Property="CharacterSpacing" Value="1"></Setter>
+                    <Setter Property="Background" Value="#BB8E49"></Setter>
+                    <Setter Property="TextColor" Value="White"></Setter>
+                    <Setter Property="Padding" Value="2"></Setter>
+                </Style>
+            </StackLayout.Resources>
+            <Image Margin="0,40,0,30" HorizontalOptions="CenterAndExpand" HeightRequest="180" WidthRequest="250" Source="pastel2.png"></Image>
+            <StackLayout Orientation="Horizontal">
+                <Label>Nombre del pastel:</Label>
+                <Entry Text="{Binding Pastel.NombrePastel}"></Entry>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label>Costo:</Label>
+                <Entry Keyboard="Numeric" Text="{Binding  Pastel.Costo, Converter={StaticResource Key=stringToDecimal}}"></Entry>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label>Fecha de venta:</Label>
+                <DatePicker Date="{Binding Pastel.FechaVenta}" MinimumDate="{Binding FechaActual}"   WidthRequest="220" FontFamily="Century" FontSize="18" TextColor="Black"></DatePicker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label>Sucursal:</Label>
+                <Entry Text="{Binding Pastel.Sucursal}"></Entry>
+            </StackLayout>
+            <Label HeightRequest="80"  FontSize="14" Text="{Binding Errores}" TextColor="Red"></Label>
+            <StackLayout HorizontalOptions="Center" Margin="0,0,0,0" Orientation="Horizontal">
+                <Button Command="{Binding EditarCommand}" Text="&#9997; Guardar"></Button>
+                <Button Command="{Binding CancelarCommand}" Text="&#9747; Cancelar"></Button>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
