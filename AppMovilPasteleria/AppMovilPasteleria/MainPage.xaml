@@ -19,7 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -58,8 +58,8 @@
             <Entry Text="{Binding Filtro}" Placeholder="Escriba TODOS para ver todas las ventas"></Entry>
             <Button Command="{Binding FiltarCommand}" CommandParameter="{Binding Filtro}" VerticalOptions="Center" Margin="0,10,0,0" Padding="-20" HeightRequest="30" CornerRadius="30"  Text="&#8981;" WidthRequest="30"></Button>
         </StackLayout>
-        <StackLayout Grid.Row="2" Grid.ColumnSpan="3">
-            <Label HorizontalTextAlignment="Center" FontFamily="Century" FontAttributes="Italic">Arrastre y suelte en los botones para editar y eliminar</Label>
+        <StackLayout Margin="5" Grid.Row="2" Grid.ColumnSpan="3">
+            <Label LineBreakMode="WordWrap" HorizontalTextAlignment="Center" FontFamily="Century" FontAttributes="Italic">Arrastre y suelte el elemento en los botones de la parte inferior derecha para editar y eliminar</Label>
         </StackLayout>
         <CollectionView Grid.Row="3" Grid.ColumnSpan="3" x:Name="cv" ItemsSource="{Binding ListaVentas}" >
             <CollectionView.ItemTemplate>
@@ -68,7 +68,8 @@
                         <Frame BorderColor="#BB8E49" HeightRequest="100">
                           
                             <Frame.GestureRecognizers>
-                                <DragGestureRecognizer CanDrag="True" DropCompleted="DragGestureRecognizer_DropCompleted"   DragStarting="DragGestureRecognizer_DragStarting" DragStartingCommand="{Binding Source={x:Reference bcPasteles}, Path=Drag}" DragStartingCommandParameter="{Binding .}"></DragGestureRecognizer>
+                                <DragGestureRecognizer  CanDrag="True" DropCompleted="DragGestureRecognizer_DropCompleted"   DragStarting="DragGestureRecognizer_DragStarting" DragStartingCommand="{Binding Source={x:Reference bcPasteles}, Path=Drag}" DragStartingCommandParameter="{Binding .}"></DragGestureRecognizer>
+                                <DropGestureRecognizer DragLeave="DropGestureRecognizer_DragLeave" ></DropGestureRecognizer>
                             </Frame.GestureRecognizers>
                             <StackLayout Orientation="Horizontal">
                                 <StackLayout WidthRequest="40">
@@ -112,17 +113,19 @@
         <Button Margin="0,0,15,150" IsVisible="False" Grid.Row="3" Grid.Column="2"  x:Name="btn1"  Text="&#9997;"  HorizontalOptions="End" VerticalOptions="End" CornerRadius="100" HeightRequest="60" WidthRequest="60">
 
             <Button.GestureRecognizers>
-                <DropGestureRecognizer  AllowDrop="True" DropCommand="{Binding Source={x:Reference bcPasteles}, Path=VerEditarCommand}" DropCommandParameter="{Binding Pastel}"></DropGestureRecognizer>
+                <DropGestureRecognizer AllowDrop="True" DropCommand="{Binding Source={x:Reference bcPasteles}, Path=VerEditarCommand}" DropCommandParameter="{Binding Pastel}"></DropGestureRecognizer>
             </Button.GestureRecognizers>
         </Button>
         <Button  Margin="0,0,15,60" IsVisible="False" Grid.Row="3"  Grid.Column="2" x:Name="btn2" Text="&#128465;"  HorizontalOptions="End" VerticalOptions="End" CornerRadius="100" HeightRequest="60" WidthRequest="60">
 
             <Button.GestureRecognizers>
-                <DropGestureRecognizer AllowDrop="True" DropCommand="{Binding Source={x:Reference bcPasteles}, Path=EliminarCommand}" DropCommandParameter="{Binding Pastel}"></DropGestureRecognizer>
+                <DropGestureRecognizer  AllowDrop="True" DropCommand="{Binding Source={x:Reference bcPasteles}, Path=EliminarCommand}" DropCommandParameter="{Binding Pastel}"></DropGestureRecognizer>
             </Button.GestureRecognizers>
         </Button>
         <Button x:Name="btn3" Grid.Row="3" Grid.Column="2" Padding="5" Margin="0,0,15,15" Command="{Binding VerAgregarCommand}" Text="&#10010;" HorizontalOptions="End" VerticalOptions="End" CornerRadius="100" HeightRequest="60" WidthRequest="60">
-        
+            <Button.GestureRecognizers>
+                <DropGestureRecognizer DragLeave="DropGestureRecognizer_DragLeave"></DropGestureRecognizer>
+            </Button.GestureRecognizers>
         </Button>
     </Grid>
 </ContentPage>

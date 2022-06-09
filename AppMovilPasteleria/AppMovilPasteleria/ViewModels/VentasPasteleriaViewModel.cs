@@ -17,7 +17,6 @@ namespace AppMovilPasteleria.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private AgregarVentaPastelView agregarVentaPastelView;
         private EditarVentaPastelView editarVentaPastelView;
-        private MainPage mainPageView;
         private Pasteles pastel;
         private string filtro;
 
@@ -26,9 +25,6 @@ namespace AppMovilPasteleria.ViewModels
             get { return filtro; }
             set { filtro = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Filtro")); }
         }
-
-
-
 
         public Pasteles Pastel
         {
