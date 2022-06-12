@@ -12,7 +12,7 @@ namespace AppClientePartidoEnVivo.Repositories
 
         public PartidosRepository()
         {
-            var ruta = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "partidos.db3";
+            var ruta = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/partidos.db3";
             //Crear la bd y si existe la abre
             Context = new SQLiteConnection(ruta);
 

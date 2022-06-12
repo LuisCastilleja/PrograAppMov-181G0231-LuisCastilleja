@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppClientePartidoEnVivo.Views.PartidosEnVivoView"
+            xmlns:mvvm="clr-namespace:AppClientePartidoEnVivo.ViewModels"
+             xmlns:models ="clr-namespace:AppClientePartidoEnVivo.Models"
+             Title="En Vivo"
+             IconImageSource="balon2.png">
+   
+    <StackLayout>
+
+        <Label>Gola</Label>
+        <!--<CollectionView ItemsSource="{Binding ListaPartidos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Partido">
+                    <StackLayout>
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer  NumberOfTapsRequired="2">
+
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Equipos}"></Label>
+                                <Label Text="{Binding Goles, StringFormat='Resultado al momento: {0}'}" Grid.Row="1"></Label>
+                                <Label Text="{Binding Minuto, StringFormat='Minuto: {0}'}" Grid.Row="2"></Label>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+        </StackLayout>
+</ContentPage>

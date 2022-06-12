@@ -25,8 +25,8 @@ namespace NotificacionesPartidoEnVivo.ViewModels
         public HttpClientHelper<Partido> Client;
         public PartidoEnVivoRepository repository = new PartidoEnVivoRepository();
 
-        private Partido partido;
-        private string error;
+        private Partido partido = new Partido();
+        private string error = "";
 
         public Partido Partido
         {

@@ -51,6 +51,38 @@ namespace APIPasteleria.Controllers
                 });
             return Ok(partidos);
         }
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var partido = repository.GetAll().Where(x => x.Eliminado == 0 && x.Id == id).Select(
+                    x=> new
+                    {
+                        x.Id,
+                        x.Equipos,
+                        x.DescripcionPartido,
+                        x.Goles,
+                        x.Minuto,
+                        x.EstadoPartido,
+                        x.FechaPartido
+                    }      
+                    );
+                if (partido != null)
+                {
+                    return Ok(partido);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+               
+            }
+        }
         [HttpPost]
         public async Task<IActionResult> Post(Partido par)
         {
@@ -68,8 +100,13 @@ namespace APIPasteleria.Controllers
                     //Datos que quiero que lleve
                     Data = new Dictionary<string, string>()
                     {
-                    //Con solo el Id podemos descargar los datos
                         {"Id", par.Id.ToString() },
+                        {"Goles", par.Goles},
+                        {"Equipos", par.Equipos },
+                        {"Minuto", par.Minuto },
+                        {"Descripcion", par.DescripcionPartido},
+                        {"Estado", par.EstadoPartido },
+                        {"Fecha", par.FechaPartido.ToString()},
                         {"Accion","Nuevo"}
                     }
                 };

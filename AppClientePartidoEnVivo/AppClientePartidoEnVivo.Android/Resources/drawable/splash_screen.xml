@@ -3,9 +3,9 @@
 	<item>
 		<color android:color="@color/splash_background"></color>
 	</item>
-	<item>
+	<item android:width="@dimen/abc_dialog_fixed_width_major">
 		<bitmap
-			android:src="@drawable/fondovolea"
+			android:src="@drawable/fondochilena"
 			android:tileMode="disabled"
 			android:gravity="center"
 			>

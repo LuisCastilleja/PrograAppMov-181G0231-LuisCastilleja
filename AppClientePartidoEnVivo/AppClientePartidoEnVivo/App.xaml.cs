@@ -2,12 +2,15 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AppClientePartidoEnVivo.Views;
+using Microsoft.Extensions.DependencyInjection;
+using AppClientePartidoEnVivo.Repositories;
+
 namespace AppClientePartidoEnVivo
 {
     public partial class App : Application
     {
-        public static Action PartidosActualizados;
-        public static Action LanzarEvento;
+        public static IServiceProvider ServiceProvider { get; set; }
+        public static event Action PartidosActualizados;
 
         public static void Actualizar()
         {
@@ -16,10 +19,15 @@ namespace AppClientePartidoEnVivo
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new PartidosView());
+            SetupServices();
+            MainPage = new NavigationPage(new PartidosTabbedView());
         }
-
+        void SetupServices()
+        {
+            var services = new ServiceCollection();
+            services.AddSingleton<PartidosRepository>();
+            ServiceProvider = services.BuildServiceProvider();
+        }
         protected override void OnStart()
         {
         }

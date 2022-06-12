@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace AppClientePartidoEnVivo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PartidosView : ContentPage
+    public partial class PartidosTabbedView : TabbedPage
     {
-        public PartidosView()
+        public PartidosTabbedView()
         {
             InitializeComponent();
         }
