@@ -4,16 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NotificacionesPartidoEnVivo.Views"
+             xmlns:mvvvm="clr-namespace:NotificacionesPartidoEnVivo.ViewModels"
              mc:Ignorable="d" Name="verPartidosvm"
              d:DesignHeight="450" d:DesignWidth="800">
-  
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top" Margin="5,10" HorizontalAlignment="Left">
-            <Button  Height="35" FontSize="14" Padding="2" Width="240" Background="#BDC268" Foreground="White" FontFamily="Century Gothic" Command="{Binding VerAgregarCommand}">Nueva actualizacion de partido</Button>
+            <Button  Height="35" FontSize="14" Padding="2" Width="180" Background="#BDC268" Foreground="White" FontFamily="Century Gothic" Command="{Binding VerAgregarCommand}">Nueva actualización</Button>
+            <Button  Height="35" FontSize="14" Padding="2" Width="180" Background="#BDC268" Foreground="White" FontFamily="Century Gothic" Command="{Binding VerEditarCommand}" CommandParameter="{Binding .}">Editar actualización</Button>
+            <Button  Height="35" FontSize="14" Padding="2" Width="180" Background="#BDC268" Foreground="White" FontFamily="Century Gothic" Command="{Binding VerEliminarCommand}" CommandParameter="{Binding .}">Eliminar actualización</Button>
         </WrapPanel>
-        <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding ListaPartidos}" Margin="15,0,15,10">
-                <ItemsControl.ItemTemplate>
+            <ListView SelectionMode="Single" SelectedItem="{Binding Partido}" ItemsSource="{Binding ListaPartidos}" Margin="15,0,15,10" >
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Grid.Column="0"  Margin="0,0,0,10">
                             <StackPanel.Resources>
@@ -22,11 +23,6 @@
                                     <Setter Property="FontFamily" Value="Century Gothic"></Setter>
                                 </Style>
                             </StackPanel.Resources>
-                            <StackPanel.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Eliminar" Click="MenuItem_Click" CommandParameter="{Binding Id}"></MenuItem>
-                                </ContextMenu>
-                            </StackPanel.ContextMenu>
                             <TextBlock FontSize="16" Margin="0,0,5,0" FontWeight="Bold" Text="{Binding Equipos}"></TextBlock>
                             <TextBlock Text="{Binding DescripcionPartido}"></TextBlock>
                             <TextBlock Text="{Binding Goles, StringFormat='Resultado al momento: {0}'}"></TextBlock>
@@ -35,8 +31,7 @@
                             <TextBlock Text="{Binding FechaPartido,StringFormat='Fecha del partido: {0:D}'}" Margin="0,0,0,10"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                </ListView.ItemTemplate>
+            </ListView>
     </DockPanel>
 </UserControl>

@@ -29,6 +29,8 @@
             <ContentControl.Resources>
                 <local:AgregarPartidoView x:Key="Agregar"></local:AgregarPartidoView>
                 <local:VerPartidos x:Key="Ver"></local:VerPartidos>
+                <local:EditarPartidoView x:Key="Editar"></local:EditarPartidoView>
+                <local:EliminarPartidoView x:Key="Eliminar"></local:EliminarPartidoView>
             </ContentControl.Resources>
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
@@ -39,11 +41,11 @@
                         <DataTrigger Binding="{Binding Vistas}" Value="{x:Static mvvvm:Vistas.Agregar}">
                             <Setter Property="Content" Value="{StaticResource Agregar}"></Setter>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Vistas}" Value="{x:Static mvvvm:Vistas.Eliminar}">
-                            <Setter Property="Content" Value="{StaticResource Agregar}"></Setter>
+                        <DataTrigger Binding="{Binding Vistas}" Value="{x:Static mvvvm:Vistas.Editar}">
+                            <Setter Property="Content" Value="{StaticResource Editar}"></Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Vistas}" Value="{x:Static mvvvm:Vistas.Eliminar}">
-                            <Setter Property="Content" Value="{StaticResource Agregar}"></Setter>
+                            <Setter Property="Content" Value="{StaticResource Eliminar}"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

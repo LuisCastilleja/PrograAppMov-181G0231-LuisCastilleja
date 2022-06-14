@@ -15,18 +15,20 @@ using AndroidX.Core.App;
 using AppClientePartidoEnVivo.Helpers;
 using System.Globalization;
 
+[assembly:Xamarin.Forms.Dependency(typeof(AppClientePartidoEnVivo.Droid.ServicioActualizaciones))]
 namespace AppClientePartidoEnVivo.Droid
 {
-    [Service(Exported =false)]
+    [Service(Exported = false)]
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
-    public class ServicioActualizaciones: FirebaseMessagingService
+    public class ServicioActualizaciones : FirebaseMessagingService
     {
-        
-        public  override void OnMessageReceived(RemoteMessage p0)
+        public override void OnMessageReceived(RemoteMessage p0)
         {
+
             try
             {
-                //PartidosRepository repository = new PartidosRepository();
+                PartidosRepository repository = new PartidosRepository();
+
                 Partido partido = null;
                 if (p0.Data != null)
                 {
@@ -34,25 +36,52 @@ namespace AppClientePartidoEnVivo.Droid
                     //Si la accion que me regresa es agregar
                     if (datos["Accion"] == "Nuevo")
                     {
-                        //Tomamos el id que viene en datos
-                        //Buscamos el partido con ese id
 
                         //Instanciamos un nuevo objeto de la clase partido
                         //y le pasamos los datos que tiene la variable par
                         partido = new Partido()
-                        {                         
-                                DescripcionPartido = datos["Descripcion"],
-                                Goles = datos["Goles"],
-                                Equipos = datos["Equipos"],
-                                FechaPartido = DateTime.ParseExact(datos["Fecha"],
+                        {
+                            DescripcionPartido = datos["Descripcion"],
+                            Goles = datos["Goles"],
+                            Equipos = datos["Equipos"],
+                            FechaPartido = DateTime.ParseExact(datos["Fecha"],
                            "dd/MM/yyyy hh:mm:ss tt",
                            new CultureInfo("es-MX")),
-                                EstadoPartido = datos["Equipos"],
-                                Minuto = datos["Minuto"],
-                            };
-                        }
-                    //Si la accion es eliminar
+                            EstadoPartido = datos["Equipos"],
+                            Minuto = datos["Minuto"],
+                        };
+                        repository.Insert(partido);
+                    }
+                    //Si la accion es editar
+                    else if (datos["Accion"] == "Editar")
+                    {
+                        var id = int.Parse(datos["Id"]);
+                        var partidoEditar = repository.Get(id);
+                        if (partidoEditar != null)
+                        {
+                            partidoEditar.DescripcionPartido = datos["Descripcion"];
+                            partidoEditar.Goles = datos["Goles"];
+                            partidoEditar.Equipos = datos["Equipos"];
+                            partidoEditar.FechaPartido = DateTime.ParseExact(datos["Fecha"],
+                       "dd/MM/yyyy hh:mm:ss tt",
+                       new CultureInfo("es-MX"));
+                            partidoEditar.EstadoPartido = datos["Equipos"];
+                            partidoEditar.Minuto = datos["Minuto"];
 
+                            repository.Update(partidoEditar);
+                        }
+                    }
+                    //Si la acción es eliminar
+                    else if (datos["Accion"] == "Eliminar")
+                    {
+                        var id = int.Parse(datos["Id"]);
+                        var partidoEliminar = repository.Get(id);
+
+                        if(partidoEliminar != null)
+                        {
+                            repository.Delete(partidoEliminar);
+                        }
+                    }
                     if (App.Current == null)
                     {
                         if (partido != null)
@@ -66,9 +95,9 @@ namespace AppClientePartidoEnVivo.Droid
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-              var m =  ex.Message;
+                var m = ex.Message;
             }
             base.OnMessageReceived(p0);
         }

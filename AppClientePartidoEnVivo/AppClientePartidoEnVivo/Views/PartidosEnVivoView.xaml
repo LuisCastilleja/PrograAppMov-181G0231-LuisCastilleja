@@ -6,11 +6,11 @@
              xmlns:models ="clr-namespace:AppClientePartidoEnVivo.Models"
              Title="En Vivo"
              IconImageSource="balon2.png">
-   
+    <ContentPage.BindingContext>
+        <mvvm:PartidoViewModel></mvvm:PartidoViewModel>
+    </ContentPage.BindingContext>
     <StackLayout>
-
-        <Label>Gola</Label>
-        <!--<CollectionView ItemsSource="{Binding ListaPartidos}">
+        <CollectionView ItemsSource="{Binding ListaPartidos}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Partido">
                     <StackLayout>
@@ -36,6 +36,6 @@
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>-->
+        </CollectionView>
         </StackLayout>
 </ContentPage>

@@ -17,13 +17,13 @@ namespace APIPasteleria.Controllers
     public class PartidoVivoController : ControllerBase
     {
         public Itesrcne_181g0231Context Context { get; set; }
-        PartidoEnVivoRepository  repository;
+        PartidoEnVivoRepository repository;
         public PartidoVivoController(Itesrcne_181g0231Context context)
         {
             Context = context;
             repository = new PartidoEnVivoRepository(Context);
 
-            if(FirebaseApp.DefaultInstance == null)
+            if (FirebaseApp.DefaultInstance == null)
             {
                 //Abrir la configuración
                 FirebaseApp.Create(new AppOptions
@@ -31,14 +31,14 @@ namespace APIPasteleria.Controllers
                     //Obtener las credenciales del json
                     //Que descargamos de Firebase
                     Credential = GoogleCredential.FromFile("partidos.json")
-                });                                   
+                });
             }
         }
         [HttpGet]
         public IActionResult Get()
         {
             var partidos = repository.GetAll().OrderByDescending(x => x.FechaPartido)
-                .Where(x=>x.Eliminado==0).Select(
+                .Where(x => x.Eliminado == 0).Select(
                 x => new
                 {
                     x.Id,
@@ -51,42 +51,65 @@ namespace APIPasteleria.Controllers
                 });
             return Ok(partidos);
         }
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpPut]
+        public async Task<IActionResult> Put(Partido par)
         {
-            if (id == 0)
+            if (par != null)
             {
-                return BadRequest();
-            }
-            else
-            {
-                var partido = repository.GetAll().Where(x => x.Eliminado == 0 && x.Id == id).Select(
-                    x=> new
-                    {
-                        x.Id,
-                        x.Equipos,
-                        x.DescripcionPartido,
-                        x.Goles,
-                        x.Minuto,
-                        x.EstadoPartido,
-                        x.FechaPartido
-                    }      
-                    );
+                var partido = repository.GetById(par.Id);
                 if (partido != null)
                 {
-                    return Ok(partido);
+                    if (repository.IsValid(par, out List<string> errors))
+                    {
+                        partido.Eliminado = par.Eliminado;
+                        partido.Equipos = par.Equipos;
+                        partido.Minuto = par.Minuto;
+                        partido.EstadoPartido = par.EstadoPartido;
+                        partido.DescripcionPartido = par.DescripcionPartido;
+                        partido.Goles = par.Goles;
+                        partido.FechaPartido = par.FechaPartido;
+
+                        repository.Update(partido);
+
+                        //Mandar notificacion de edicion
+                        Message m = new Message()
+                        {
+                            Topic = "partidos",
+                            //Datos que quiero que lleve
+                            Data = new Dictionary<string, string>()
+                        {
+                            {"Id", partido.Id.ToString() },
+                            {"Goles", partido.Goles},
+                            {"Equipos", partido.Equipos },
+                            {"Minuto", partido.Minuto },
+                            {"Descripcion", partido.DescripcionPartido},
+                            {"Estado", partido.EstadoPartido },
+                            {"Fecha", partido.FechaPartido.ToString()},
+                            {"Accion","Editar"}
+                        }
+                        };
+                        await FirebaseMessaging.DefaultInstance.SendAsync(m);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest(errors);
+                    }
                 }
                 else
                 {
-                    return BadRequest();
+                    return NotFound();
                 }
-               
+            }
+            else
+            {
+                return BadRequest("Proporcione la actualización que sera editada");
             }
         }
         [HttpPost]
         public async Task<IActionResult> Post(Partido par)
         {
-            if(repository.IsValid(par, out List<string> errors))
+            if (repository.IsValid(par, out List<string> errors))
             {
                 par.Eliminado = 0;
                 repository.Insert(par);
@@ -94,6 +117,7 @@ namespace APIPasteleria.Controllers
                 //Mensaje de Firebase
                 //Mensajeria instantanea a un servicio
                 //InApp Messagging
+                //Mandar notificacion de agregar
                 Message m = new Message()
                 {
                     Topic = "partidos",
@@ -117,6 +141,45 @@ namespace APIPasteleria.Controllers
             else
             {
                 return BadRequest(errors);
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if(id == 0)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var partido = repository.GetById(id);
+                if (partido != null)
+                {
+                    partido.Eliminado = 1;
+                    repository.Update(partido);
+
+
+                    //Mandar notificacion de eliminado.
+                    Message m = new Message()
+                    {
+                        Topic = "partidos",
+                        //Datos que quiero que lleve
+                        Data = new Dictionary<string, string>()
+                    {
+                        {"Id", partido.Id.ToString() },                     
+                        {"Accion","Eliminar"}
+                    }
+                    };
+                    await FirebaseMessaging.DefaultInstance.SendAsync(m);
+
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
         }
     }

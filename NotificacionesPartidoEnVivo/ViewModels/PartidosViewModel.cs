@@ -46,21 +46,71 @@ namespace NotificacionesPartidoEnVivo.ViewModels
             }
         }
         public ICommand VerAgregarCommand { get; set; }
+        public ICommand VerEditarCommand { get; set; }
+        public ICommand VerEliminarCommand { get; set; }
 
         //Para aceptar la edicion o aceptar al agregar un partido
         public ICommand GuardarCommand { get; set; }
         public ICommand CancelarCommand { get; set; }
+        public ICommand EliminarCommand { get; set; }
         public PartidosViewModel()
         {
-            Estados!.Add("En vivo");
+            Estados.Add("En vivo");
             Estados.Add("Finalizado");
             Uri uri = new("https://181g0231.82g.itesrc.net/api/PartidoVivo");
             Client = new HttpClientHelper<Partido>(uri!);
             _ = DescargarPartidos();
             VerAgregarCommand = new RelayCommand(VerAgregar);
+            VerEditarCommand = new RelayCommand(VerEditar);
+            VerEliminarCommand = new RelayCommand(VerEliminar);
             GuardarCommand = new RelayCommand(Guardar);
             CancelarCommand = new RelayCommand(Cancelar);
+            EliminarCommand = new RelayCommand(Eliminar);
         }
+
+        private void VerEliminar()
+        {
+            if (Partido != null)
+            {
+                Error = "";
+                Vistas = Vistas.Eliminar;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+            }
+        }
+
+        private void VerEditar()
+        {
+            if (Partido != null)
+            {
+                Error = "";
+                Vistas = Vistas.Editar;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+            }      
+        }
+
+        private async void Eliminar()
+        {
+            if (Partido != null)
+            {
+                try
+                {
+                    await Client.Delete(Partido.Id);
+                    Vistas = Vistas.VerPartidos;
+                    Error = "";
+                    _ = DescargarPartidos();
+                }
+                catch(Exception ex)
+                {
+                    Error = ex.Message;
+                }
+               
+            }
+            else
+            {
+                Error = "Seleccione una actualizacion para eliminarla.";
+            }
+        }
+
         public async Task DescargarPartidos()
         {
             ListaPartidos = new();
@@ -109,7 +159,26 @@ namespace NotificacionesPartidoEnVivo.ViewModels
                 }
                 else
                 {
-                    //Para editar
+                    try
+                    {
+                        //Para editarr
+                        if (repository.IsValid(Partido, out List<String> errors))
+                        {
+                            //Si no hay excepciones hacemos el post.
+                            await Client.Put(Partido);
+                            Vistas = Vistas.VerPartidos;
+                            Error = "";
+                            _ = DescargarPartidos();
+                        }
+                        else
+                        {
+                            Error = errors.FirstOrDefault()!;
+                        }
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        Error = ex.Message;
+                    }
                 }
             }
         }

@@ -1,5 +1,4 @@
-﻿using NotificacionesPartidoEnVivo.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,17 +16,13 @@ using System.Windows.Shapes;
 namespace NotificacionesPartidoEnVivo.Views
 {
     /// <summary>
-    /// Lógica de interacción para VerPartidos.xaml
+    /// Lógica de interacción para EliminarPartidoView.xaml
     /// </summary>
-    public partial class VerPartidos : UserControl
+    public partial class EliminarPartidoView : UserControl
     {
-        public VerPartidos()
+        public EliminarPartidoView()
         {
             InitializeComponent();
-        }
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

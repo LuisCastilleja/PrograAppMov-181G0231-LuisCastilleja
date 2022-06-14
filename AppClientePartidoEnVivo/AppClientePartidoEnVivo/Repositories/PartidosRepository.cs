@@ -8,35 +8,35 @@ namespace AppClientePartidoEnVivo.Repositories
 {
     public class PartidosRepository
     {
-       public SQLiteConnection Context { get; set; }
+        SQLiteConnection conexion;
 
         public PartidosRepository()
         {
             var ruta = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/partidos.db3";
             //Crear la bd y si existe la abre
-            Context = new SQLiteConnection(ruta);
+            conexion = new SQLiteConnection(ruta);
 
-            Context.CreateTable<Partido>();
+            conexion.CreateTable<Partido>();
         }
         public Partido Get(int id)
         {
-            return Context.Table<Partido>().FirstOrDefault(x => x.Id == id);
+            return conexion.Table<Partido>().FirstOrDefault(x => x.Id == id);
         }
         public IEnumerable<Partido> GetAll()
         {
-            return Context.Table<Partido>();
+            return conexion.Table<Partido>();
         }
         public void Insert(Partido partido)
         {
-            Context.Insert(partido);
+            conexion.Insert(partido);
         }
         public void Update(Partido partido)
         {
-            Context.Update(partido);
+            conexion.Update(partido);
         }
         public void Delete(Partido partido)
         {
-            Context.Delete(partido);
+            conexion.Delete(partido);
         }
     }
 }
