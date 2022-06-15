@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AppClientePartidoEnVivo.Views;
+
 namespace AppClientePartidoEnVivo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PartidosEnVivoView : ContentPage
+    public partial class PartidoCompletoFinalizadoView : ContentPage
     {
-        public PartidosEnVivoView()
+        public PartidoCompletoFinalizadoView()
         {
             InitializeComponent();
-        }
-        
-        private  void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-
         }
     }
 }

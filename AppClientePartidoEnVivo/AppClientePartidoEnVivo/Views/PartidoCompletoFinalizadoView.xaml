@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppClientePartidoEnVivo.Views.PartidoCompletoFinalizadoView" Background="#E3E7E3">
+    <StackLayout>
+        <StackLayout.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontFamily" Value="Century Gothic"/>
+                <Setter Property="HorizontalTextAlignment"  Value="Center"/>
+                <Setter Property="Margin" Value="0,10,0,10"/>
+            </Style>
+        </StackLayout.Resources>
+        <Label Margin="0,20,0,20" FontSize="30" FontAttributes="Bold" Text="{Binding Partido.Equipos}"></Label>
+        <Image HorizontalOptions="CenterAndExpand" Source="finalizado.png" Margin="0,0,0,20" HeightRequest="180"></Image>
+        <Label Text="{Binding Partido.DescripcionPartido}"></Label>
+        <Label Text="{Binding Partido.Goles, StringFormat='Resultado final: {0}'}"></Label>
+        <Label Text="{Binding Partido.Minuto, StringFormat='Minuto: {0}'}"></Label>
+        <Label Text="{Binding Partido.FechaPartido, StringFormat='Fecha del partido: {0:D}'}"></Label>
+        <Image VerticalOptions="End" Source="arbitro2.png" HeightRequest="220" HorizontalOptions="End"></Image>
+    </StackLayout>
+</ContentPage>

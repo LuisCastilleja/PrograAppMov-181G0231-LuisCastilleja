@@ -24,8 +24,9 @@ namespace AppClientePartidoEnVivo.Repositories
         }
         public IEnumerable<Partido> GetAll()
         {
-            return conexion.Table<Partido>();
+            return conexion.Table<Partido>().OrderByDescending(x=>x.FechaPartido);
         }
+   
         public void Insert(Partido partido)
         {
             conexion.Insert(partido);

@@ -8,14 +8,30 @@ using System.Text;
 using AppClientePartidoEnVivo.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Xamarin.Essentials;
+using System.Windows.Input;
+using Xamarin.Forms;
+using AppClientePartidoEnVivo.Views;
+using System.Globalization;
 
 namespace AppClientePartidoEnVivo.ViewModels
 {
-    public class PartidoViewModel:INotifyPropertyChanged
+    public class PartidoViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Partido> ListaPartidos { get; set; } = new ObservableCollection<Partido>();
+        public ObservableCollection<Partido> ListaPartidosFinalizados { get; set; } = new ObservableCollection<Partido>();
         PartidosRepository repository = new PartidosRepository();
         HttpClientHelper<Partido> Client;
+        private PartidoCompletoView partidoCompletoView;
+        private PartidoCompletoFinalizadoView partidoCompletoFinalizadoView;
+        private Partido partido;
+
+        public Partido Partido
+        {
+            get { return partido; }
+            set { partido = value; OnPropertyChanged(); }
+        }
+
+        public ICommand VerPartidoCompleto { get; set; }
         public PartidoViewModel()
         {
             Uri uri = new Uri("https://181g0231.82g.itesrc.net/api/PartidoVivo");
@@ -30,12 +46,35 @@ namespace AppClientePartidoEnVivo.ViewModels
                 Actualizar();
             }
             App.PartidosActualizados += App_PartidosActualizados;
-            
+            VerPartidoCompleto = new Command(VerPartido);
+        }
+
+        private async void VerPartido(object obj)
+        {
+            var partidoCompleto = obj as Partido;
+            if (partidoCompleto.EstadoPartido == "Finalizado")
+            {
+                if (partidoCompletoFinalizadoView == null)
+                {
+                    partidoCompletoFinalizadoView = new PartidoCompletoFinalizadoView() { BindingContext = this };
+                }
+                Partido = partidoCompleto;
+                await App.Current.MainPage.Navigation.PushAsync(partidoCompletoFinalizadoView);
+            }
+            else
+            {
+                if (partidoCompletoView == null)
+                {
+                    partidoCompletoView = new PartidoCompletoView() { BindingContext = this };
+                }
+                Partido = partidoCompleto;
+                await App.Current.MainPage.Navigation.PushAsync(partidoCompletoView);
+            }
         }
 
         private async void DescargarPrimeraVez()
         {
-            if(Connectivity.NetworkAccess == NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 var fecha = DateTime.Now;
                 var listaPartidos = await Client.Get();
@@ -45,6 +84,11 @@ namespace AppClientePartidoEnVivo.ViewModels
                 }
                 Preferences.Set("FechaActualizada", fecha);
                 Actualizar();
+            }
+            else
+            {
+                IToast toast = DependencyService.Get<IToast>();
+                toast.MostrarToast("No tiene conexión a internet. Verifique su conexión a internet para ver los partidos actualizados");
             }
         }
 
@@ -58,10 +102,19 @@ namespace AppClientePartidoEnVivo.ViewModels
         {
             var lista = repository.GetAll();
             ListaPartidos.Clear();
+            ListaPartidosFinalizados.Clear();
             foreach (var partido in lista)
             {
-                ListaPartidos.Add(partido);
+                if (partido.EstadoPartido == "En vivo")
+                {
+                    ListaPartidos.Add(partido);
+                }
+                else
+                {
+                    ListaPartidosFinalizados.Add(partido);
+                }
             }
+
         }
 
 

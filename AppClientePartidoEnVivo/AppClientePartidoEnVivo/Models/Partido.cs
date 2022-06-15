@@ -7,7 +7,7 @@ namespace AppClientePartidoEnVivo.Models
 {
     public class Partido
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
         public string Equipos { get; set; }
         public string DescripcionPartido { get; set; }

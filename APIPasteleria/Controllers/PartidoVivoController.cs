@@ -61,6 +61,7 @@ namespace APIPasteleria.Controllers
                 {
                     if (repository.IsValid(par, out List<string> errors))
                     {
+                        partido.Id = par.Id;
                         partido.Eliminado = par.Eliminado;
                         partido.Equipos = par.Equipos;
                         partido.Minuto = par.Minuto;

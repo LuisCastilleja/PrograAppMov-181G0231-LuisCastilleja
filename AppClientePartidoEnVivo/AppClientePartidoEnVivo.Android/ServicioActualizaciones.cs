@@ -41,13 +41,14 @@ namespace AppClientePartidoEnVivo.Droid
                         //y le pasamos los datos que tiene la variable par
                         partido = new Partido()
                         {
+                            Id = int.Parse(datos["Id"]),
                             DescripcionPartido = datos["Descripcion"],
                             Goles = datos["Goles"],
                             Equipos = datos["Equipos"],
                             FechaPartido = DateTime.ParseExact(datos["Fecha"],
                            "dd/MM/yyyy hh:mm:ss tt",
                            new CultureInfo("es-MX")),
-                            EstadoPartido = datos["Equipos"],
+                            EstadoPartido = datos["Estado"],
                             Minuto = datos["Minuto"],
                         };
                         repository.Insert(partido);
@@ -59,13 +60,14 @@ namespace AppClientePartidoEnVivo.Droid
                         var partidoEditar = repository.Get(id);
                         if (partidoEditar != null)
                         {
+                            partidoEditar.Id = int.Parse(datos["Id"]);
                             partidoEditar.DescripcionPartido = datos["Descripcion"];
                             partidoEditar.Goles = datos["Goles"];
                             partidoEditar.Equipos = datos["Equipos"];
                             partidoEditar.FechaPartido = DateTime.ParseExact(datos["Fecha"],
                        "dd/MM/yyyy hh:mm:ss tt",
                        new CultureInfo("es-MX"));
-                            partidoEditar.EstadoPartido = datos["Equipos"];
+                            partidoEditar.EstadoPartido = datos["Estado"];
                             partidoEditar.Minuto = datos["Minuto"];
 
                             repository.Update(partidoEditar);
