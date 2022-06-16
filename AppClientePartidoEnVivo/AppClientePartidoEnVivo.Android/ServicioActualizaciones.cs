@@ -104,7 +104,6 @@ namespace AppClientePartidoEnVivo.Droid
             base.OnMessageReceived(p0);
         }
 
-
         //Mostrar la notificaion
         public void ShowNotification(int id, string title, string text)
         {

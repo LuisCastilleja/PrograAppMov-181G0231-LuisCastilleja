@@ -20,7 +20,7 @@
         <StackLayout.BindingContext>
             <mvvm:PartidoViewModel x:Name="partidosBc"></mvvm:PartidoViewModel>
         </StackLayout.BindingContext>
-        <Label Margin="0,10,0,0" BackgroundColor="#E3E7E3"  Text="Doble tap sobre el partido para ver mas detalles" HorizontalTextAlignment="Center" FontSize="12" FontFamily="Century Gothic" TextColor="Black" FontAttributes="Italic"></Label>
+        <Label Margin="0,10,0,0" BackgroundColor="#E3E7E3"  Text="Doble tap sobre el partido para ver más detalles" HorizontalTextAlignment="Center" FontSize="12" FontFamily="Century Gothic" TextColor="Black" FontAttributes="Italic"></Label>
         <CollectionView BackgroundColor="#E3E7E3" ItemsSource="{Binding ListaPartidos}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Partido">

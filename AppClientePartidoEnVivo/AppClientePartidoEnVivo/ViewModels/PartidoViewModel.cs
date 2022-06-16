@@ -58,8 +58,19 @@ namespace AppClientePartidoEnVivo.ViewModels
                 {
                     partidoCompletoFinalizadoView = new PartidoCompletoFinalizadoView() { BindingContext = this };
                 }
-                Partido = partidoCompleto;
-                await App.Current.MainPage.Navigation.PushAsync(partidoCompletoFinalizadoView);
+                if(Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    Partido = partidoCompleto;
+                    await App.Current.MainPage.Navigation.PushAsync(partidoCompletoFinalizadoView);
+                }
+                else
+                {
+                    Partido = partidoCompleto;
+                    await App.Current.MainPage.Navigation.PushAsync(partidoCompletoFinalizadoView);
+                    IToast toast = DependencyService.Get<IToast>();
+                    toast.MostrarToast("No tiene conexión a internet. Verifique su conexión a internet para ver los partidos actualizados");
+                }
+              
             }
             else
             {
@@ -67,8 +78,18 @@ namespace AppClientePartidoEnVivo.ViewModels
                 {
                     partidoCompletoView = new PartidoCompletoView() { BindingContext = this };
                 }
-                Partido = partidoCompleto;
-                await App.Current.MainPage.Navigation.PushAsync(partidoCompletoView);
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    Partido = partidoCompleto;
+                    await App.Current.MainPage.Navigation.PushAsync(partidoCompletoView);
+                }
+                else
+                {
+                    Partido = partidoCompleto;
+                    await App.Current.MainPage.Navigation.PushAsync(partidoCompletoView);
+                    IToast toast = DependencyService.Get<IToast>();
+                    toast.MostrarToast("No tiene conexión a internet. Verifique su conexión a internet para ver los partidos actualizados");
+                }
             }
         }
 
@@ -114,7 +135,6 @@ namespace AppClientePartidoEnVivo.ViewModels
                     ListaPartidosFinalizados.Add(partido);
                 }
             }
-
         }
 
 
