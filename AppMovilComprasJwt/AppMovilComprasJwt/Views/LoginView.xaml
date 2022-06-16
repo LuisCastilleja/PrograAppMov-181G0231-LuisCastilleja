@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm ="clr-namespace:AppMovilComprasJwt.ViewModels"
+             x:Class="AppMovilComprasJwt.Views.LoginView">
+    <ContentPage.BindingContext>
+        <mvvm:LoginViewModel></mvvm:LoginViewModel>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Label Text="Iniciar sesión" FontSize="Caption" FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand" />
+
+        <Label Text="Usuario:"></Label>
+        <Entry Text="{Binding Usuarios.Usuario}"></Entry>
+
+        <Label Text="Contraseña:"></Label>
+        <Entry Text="{Binding Usuarios.Password}" IsPassword="True"></Entry>
+
+
+        <Label Text="{Binding Error}" HorizontalOptions="Center" TextColor="Red" FontSize="Small"></Label>
+
+        <ActivityIndicator IsRunning="{Binding Indicator}"></ActivityIndicator>
+
+        <Button Command="{Binding IniciarSesionCommand}" Text="Iniciar sesión" HorizontalOptions="Center"></Button>
+
+    </StackLayout>
+</ContentPage>

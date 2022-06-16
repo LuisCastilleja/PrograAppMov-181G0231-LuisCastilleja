@@ -17,8 +17,10 @@ namespace APIPasteleria.Models
         {
         }
 
+        public virtual DbSet<Compra> Compra { get; set; }
         public virtual DbSet<Partido> Partido { get; set; }
         public virtual DbSet<Pasteles> Pasteles { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +32,25 @@ namespace APIPasteleria.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasCharSet("utf8");
+
+            modelBuilder.Entity<Compra>(entity =>
+            {
+                entity.ToTable("compra");
+
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.Costo).HasColumnType("int(11)");
+
+                entity.Property(e => e.DescripcionCompra)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Fecha).HasColumnType("date");
+
+                entity.Property(e => e.Tienda)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
 
             modelBuilder.Entity<Partido>(entity =>
             {
@@ -83,6 +104,21 @@ namespace APIPasteleria.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.TimeStamp).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Usuarios>(entity =>
+            {
+                entity.ToTable("usuarios");
+
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(80);
+
+                entity.Property(e => e.Usuario)
+                    .IsRequired()
+                    .HasMaxLength(80);
             });
 
             OnModelCreatingPartial(modelBuilder);
