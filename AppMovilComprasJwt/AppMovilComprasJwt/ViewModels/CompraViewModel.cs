@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -16,15 +17,20 @@ namespace AppMovilComprasJwt.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Compra> ListaCompras { get; set; } = new ObservableCollection<Compra>();
-
+        public ICommand CerrarSesionCommand { get; set; }
         public CompraViewModel()
         {
-
+            CerrarSesionCommand = new Command(CerrarSesion);
                 DescargarDatos();
         }
 
+        private void CerrarSesion()
+        {
+            App.User.CerrarSesion();
+        }
+
         private async void DescargarDatos()
-        {           
+        {
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 var fecha = DateTime.Now;
