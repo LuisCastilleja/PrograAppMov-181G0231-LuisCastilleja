@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace AppMovilComprasJwt.Services
@@ -22,7 +23,11 @@ namespace AppMovilComprasJwt.Services
                 return token != null && DateTime.UtcNow <= fechaExpiracion;
             }
         }
-
+        public async Task<string> GetToken()
+        {
+            var x = await SecureStorage.GetAsync("Token");
+            return x;
+        }
         public async void IniciarSesion(string jwt)
         {
             //Leer el token con Hanlder para sacar las claims y mandar la info al SecurityStorage

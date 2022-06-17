@@ -38,11 +38,11 @@ namespace AppMovilComprasJwt.ViewModels
                 Error = "";
                 if (string.IsNullOrWhiteSpace(Usuarios.Usuario))
                 {
-                    Error = "Proporcione el usuario para iniciar sesión";
+                    Error = "Proporcione su usuario para iniciar sesión";
                 }
                 if (string.IsNullOrWhiteSpace(Usuarios.Password))
                 {
-                    Error = "Proporcione la contraseña para inciar sesión";
+                    Error = "Proporcione su contraseña para inciar sesión";
                 }
                 else
                 {

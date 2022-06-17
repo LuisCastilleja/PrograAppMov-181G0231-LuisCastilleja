@@ -2,26 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mvvm ="clr-namespace:AppMovilComprasJwt.ViewModels"
-             x:Class="AppMovilComprasJwt.Views.LoginView">
+             x:Class="AppMovilComprasJwt.Views.LoginView" BackgroundColor="#E3E7E3">
     <ContentPage.BindingContext>
         <mvvm:LoginViewModel></mvvm:LoginViewModel>
     </ContentPage.BindingContext>
-    <StackLayout>
-        <Label Text="Iniciar sesión" FontSize="Caption" FontAttributes="Bold"
-                HorizontalOptions="CenterAndExpand" />
-
-        <Label Text="Usuario:"></Label>
-        <Entry Text="{Binding Usuarios.Usuario}"></Entry>
-
-        <Label Text="Contraseña:"></Label>
-        <Entry Text="{Binding Usuarios.Password}" IsPassword="True"></Entry>
-
-
-        <Label Text="{Binding Error}" HorizontalOptions="Center" TextColor="Red" FontSize="Small"></Label>
-
+    <StackLayout Margin="13" >
+        <Label Margin="0,30,0,0" Text="Iniciar sesión" FontSize="36" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+        <Image Source="login.png" HorizontalOptions="Center" HeightRequest="200" Margin="50,30,0,25"></Image>
+        <Label FontAttributes="Bold" FontSize="17" Text="Usuario:"></Label>
+        <Entry Text="{Binding Usuarios.Usuario}" Margin="0,0,0,20"></Entry>
+        <Label FontAttributes="Bold" FontSize="17" Text="Contraseña:"></Label>
+        <Entry  Text="{Binding Usuarios.Password}" IsPassword="True"></Entry>
+        <Label Margin="0,20,0,0" Text="{Binding Error}" HorizontalOptions="Center" TextColor="Red" FontSize="Small"></Label>
         <ActivityIndicator IsRunning="{Binding Indicator}"></ActivityIndicator>
-
-        <Button Command="{Binding IniciarSesionCommand}" Text="Iniciar sesión" HorizontalOptions="Center"></Button>
+        <Button BackgroundColor="#EEE688" HeightRequest="60" WidthRequest="200" Command="{Binding IniciarSesionCommand}" Text="Iniciar sesión" HorizontalOptions="Center"></Button>
 
     </StackLayout>
 </ContentPage>

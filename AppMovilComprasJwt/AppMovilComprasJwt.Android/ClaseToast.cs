@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+[assembly: Xamarin.Forms.Dependency(typeof(AppMovilComprasJwt.Droid.ClaseToast))]
+
 namespace AppMovilComprasJwt.Droid
 {
     public class ClaseToast : IToast
