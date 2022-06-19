@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\BotoAzul.mp3" />
+    <None Remove="Assets\botonAma.mp3" />
+    <None Remove="Assets\botonRojo.mp3" />
+    <None Remove="Assets\botonVerde.mp3" />
+    <None Remove="Assets\inicio.mp3" />
+    <None Remove="Assets\perdedor.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\BotoAzul.mp3" />
+    <EmbeddedResource Include="Assets\botonAma.mp3" />
+    <EmbeddedResource Include="Assets\botonRojo.mp3" />
+    <EmbeddedResource Include="Assets\botonVerde.mp3" />
+    <EmbeddedResource Include="Assets\inicio.mp3" />
+    <EmbeddedResource Include="Assets\perdedor.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MarcTron.Admob" Version="1.4.5" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\SimonDiceView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\VerPuntuacionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

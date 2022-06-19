@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppMovilAnuncios.Models"
+             xmlns:mvvm="clr-namespace:AppMovilAnuncios.ViewModels"
+             xmlns:controls1="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
+             x:Class="AppMovilAnuncios.Views.SimonDiceView" BackgroundColor="Black" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+
+        <Style TargetType="Button">
+            <Setter Property="WidthRequest" Value="180"></Setter>
+            <Setter Property="HeightRequest" Value="180"></Setter>
+            <Setter Property="CornerRadius" Value="20"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <mvvm:SimonViewModel></mvvm:SimonViewModel>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Grid Margin="10,0,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.ColumnSpan="2" Text="Simon Dice:" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="Title"></Label>
+            <Button IsEnabled="False" Grid.Row="1" x:Name="Amarillo" BackgroundColor="Yellow" BindingContext="{x:Static local:Cuadrantes.Amarillo}" Clicked="Button_Clicked"></Button>
+            <Button IsEnabled="False" Grid.Row="1" Grid.Column="1"  x:Name="Rojo" BackgroundColor="DarkRed" BindingContext="{x:Static local:Cuadrantes.Rojo}" Clicked="Button_Clicked"></Button>
+            <Button IsEnabled="False" Grid.Row="2"  x:Name="Verde" BackgroundColor="DarkGreen" BindingContext="{x:Static local:Cuadrantes.Verde}" Clicked="Button_Clicked" ></Button>
+            <Button IsEnabled="False" Grid.Row="2" Grid.Column="1" x:Name="Azul" BackgroundColor="DarkBlue" BindingContext="{x:Static local:Cuadrantes.Azul}" Clicked="Button_Clicked"></Button>
+            <Button BackgroundColor="Black" TextColor="White" BorderColor="White" BorderWidth="1.2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" WidthRequest="130" HeightRequest="130" Text="Comenzar" Padding="3" CornerRadius="80" x:Name="btnIniciar" Clicked="btnIniciar_Clicked_1"></Button>
+            <Label Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,10,0" Text="Puntuación del jugador: 0" VerticalOptions="EndAndExpand" x:Name="lblPuntuacion" HorizontalOptions="EndAndExpand" FontAttributes="Italic" FontSize="Title" TextColor="White"></Label>
+            <Button x:Name="btnPuntos" Margin="0,20,0,0"  Grid.Row="4" Grid.ColumnSpan="2" BorderColor="White" BorderWidth="1.2" TextColor="White" BackgroundColor="Transparent" HeightRequest="66" CornerRadius="0" HorizontalOptions="EndAndExpand" WidthRequest="230" Command="{Binding VerPuntuacionCommand}"  Text="Ver puntuaciones"></Button>
+        </Grid>
+        <StackLayout Margin="0,13,0,0">
+            <controls1:MTAdView
+                HeightRequest="60"
+                IsEnabled="True"
+                IsVisible="True"
+                x:Name="bannerAd"
+                AdsId="ca-app-pub-2533997797424491/5291160364"
+                />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

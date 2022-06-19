@@ -21,9 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unidad 3", "Unidad 3", "{31
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMovilComprasJwt.Android", "AppMovilComprasJwt\AppMovilComprasJwt.Android\AppMovilComprasJwt.Android.csproj", "{D464CB50-DBAA-4FCF-A57D-168E55FC0137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMovilComprasJwt", "AppMovilComprasJwt\AppMovilComprasJwt\AppMovilComprasJwt.csproj", "{0803130A-9E65-4E83-BF74-05690E657369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppMovilComprasJwt", "AppMovilComprasJwt\AppMovilComprasJwt\AppMovilComprasJwt.csproj", "{0803130A-9E65-4E83-BF74-05690E657369}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unidad 4", "Unidad 4", "{1B2EC348-CB57-457D-A5FA-7552F4E43326}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMovilAnuncios.Android", "AppMovilAnuncios\AppMovilAnuncios.Android\AppMovilAnuncios.Android.csproj", "{F2988B5B-2747-46F1-8CB8-279ED276C7CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMovilAnuncios", "AppMovilAnuncios\AppMovilAnuncios\AppMovilAnuncios.csproj", "{C6D75BF0-E8DE-471D-8713-56E668948833}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,16 @@ Global
 		{0803130A-9E65-4E83-BF74-05690E657369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0803130A-9E65-4E83-BF74-05690E657369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0803130A-9E65-4E83-BF74-05690E657369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C6D75BF0-E8DE-471D-8713-56E668948833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D75BF0-E8DE-471D-8713-56E668948833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D75BF0-E8DE-471D-8713-56E668948833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D75BF0-E8DE-471D-8713-56E668948833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +95,8 @@ Global
 		{5227B536-1D7E-4CAE-AB4F-6696967191F5} = {7C636EE2-C319-4179-9711-1637E0AEC324}
 		{D464CB50-DBAA-4FCF-A57D-168E55FC0137} = {31023016-8A1D-407C-911E-F52086388916}
 		{0803130A-9E65-4E83-BF74-05690E657369} = {31023016-8A1D-407C-911E-F52086388916}
+		{F2988B5B-2747-46F1-8CB8-279ED276C7CE} = {1B2EC348-CB57-457D-A5FA-7552F4E43326}
+		{C6D75BF0-E8DE-471D-8713-56E668948833} = {1B2EC348-CB57-457D-A5FA-7552F4E43326}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B07625AF-813B-4229-8D9F-108F0E892C5D}
