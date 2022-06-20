@@ -7,6 +7,7 @@ using System.Windows.Input;
 using AppMovilAnuncios.Models;
 using AppMovilAnuncios.Repositories;
 using AppMovilAnuncios.Views;
+using MarcTron.Plugin;
 using Xamarin.Forms;
 
 namespace AppMovilAnuncios.ViewModels
@@ -37,6 +38,7 @@ namespace AppMovilAnuncios.ViewModels
         public ICommand VerPuntuacionCommand { get; set; }
         public SimonViewModel()
         {
+            CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-2533997797424491/1206545314");
             VerPuntuacionCommand = new Command(VerPuntuaciones);
             ListaPuntuaciones.Clear();
             repository = new SimonRepository();
@@ -57,6 +59,10 @@ namespace AppMovilAnuncios.ViewModels
 
         private async void VerPuntuaciones()
         {
+            if (CrossMTAdmob.Current.IsInterstitialLoaded())
+            {
+                CrossMTAdmob.Current.ShowInterstitial();
+            }
             ListaPuntuaciones.Clear();
             repository = new SimonRepository();
             var puntuaciones = repository.GetAll();

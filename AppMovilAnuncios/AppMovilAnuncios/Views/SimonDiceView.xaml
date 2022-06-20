@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AppMovilAnuncios.Models"
              xmlns:mvvm="clr-namespace:AppMovilAnuncios.ViewModels"
-             xmlns:controls1="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              x:Class="AppMovilAnuncios.Views.SimonDiceView" BackgroundColor="Black" NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
 
@@ -38,14 +37,5 @@
             <Label Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,10,0" Text="Puntuación del jugador: 0" VerticalOptions="EndAndExpand" x:Name="lblPuntuacion" HorizontalOptions="EndAndExpand" FontAttributes="Italic" FontSize="Title" TextColor="White"></Label>
             <Button x:Name="btnPuntos" Margin="0,20,0,0"  Grid.Row="4" Grid.ColumnSpan="2" BorderColor="White" BorderWidth="1.2" TextColor="White" BackgroundColor="Transparent" HeightRequest="66" CornerRadius="0" HorizontalOptions="EndAndExpand" WidthRequest="230" Command="{Binding VerPuntuacionCommand}"  Text="Ver puntuaciones"></Button>
         </Grid>
-        <StackLayout Margin="0,13,0,0">
-            <controls1:MTAdView
-                HeightRequest="60"
-                IsEnabled="True"
-                IsVisible="True"
-                x:Name="bannerAd"
-                AdsId="ca-app-pub-2533997797424491/5291160364"
-                />
-        </StackLayout>
     </StackLayout>
 </ContentPage>
