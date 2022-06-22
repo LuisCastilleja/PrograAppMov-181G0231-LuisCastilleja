@@ -27,6 +27,7 @@ namespace AppMovilAnuncios.Views
             simon.BotonEncendido += Simon_BotonEncendido;
             simon.Perdio += Simon_Perdio;
             simon.SumoPuntos += Simon_SumoPuntos;
+            simon.GanoPuntos += Simon_GanoPuntos;
             var assembly = typeof(App).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream("AppMovilAnuncios.Assets.inicio.mp3");
             var stream2 = assembly.GetManifestResourceStream("AppMovilAnuncios.Assets.botonAma.mp3");
@@ -47,6 +48,14 @@ namespace AppMovilAnuncios.Views
             player5.Load(stream5);
             player6.Load(stream6);
             InicioSonidos();
+        }
+
+        private void Simon_GanoPuntos()
+        {
+            simon.Puntuacion += 30;
+            lblPuntuacion.Text = simon.Puntuacion.ToString("Puntuación del jugador: 0");
+            btnGanarPuntos.IsEnabled = false;
+            btnGanarPuntos.BorderColor = Color.Black;
         }
 
         private void Simon_SumoPuntos()
@@ -103,11 +112,16 @@ namespace AppMovilAnuncios.Views
             lblPuntuacion.Text = simon.Puntuacion.ToString("Puntuación del jugador: 0");
             btnPuntos.IsEnabled = true;
             btnPuntos.BorderColor = Color.White;
-
+            btnGanarPuntos.IsEnabled = true;
+            btnGanarPuntos.BorderColor = Color.White;
         }
 
         private async void Simon_BotonEncendido(SimonDice cuadrante)
         {
+            Verde.IsEnabled = false;
+            Rojo.IsEnabled = false;
+            Amarillo.IsEnabled = false;
+            Azul.IsEnabled = false;
             switch (cuadrante.Cuadrantes)
             {
 
@@ -140,6 +154,11 @@ namespace AppMovilAnuncios.Views
                     await Task.Delay(2000);
                     break;
             }
+
+            Verde.IsEnabled = true;
+            Rojo.IsEnabled = true;
+            Amarillo.IsEnabled = true;
+            Azul.IsEnabled = true;
         }
 
         private void Amarillo_Clicked(object sender, EventArgs e)
@@ -164,13 +183,15 @@ namespace AppMovilAnuncios.Views
             btnIniciar.IsVisible = false;
             btnPuntos.IsEnabled = false;
             btnPuntos.BorderColor = Color.Black;
+            btnGanarPuntos.IsEnabled = false;
+            btnGanarPuntos.BorderColor = Color.Black;
+            player.Play();
+            await Task.Delay(6400);
+            simon.IniciarJuego();
             Verde.IsEnabled = true;
             Rojo.IsEnabled = true;
             Amarillo.IsEnabled = true;
             Azul.IsEnabled = true;
-            player.Play();
-            await Task.Delay(6400);
-            simon.IniciarJuego();
         }
 
         private  void btnVerPuntuacion_Clicked(object sender, EventArgs e)

@@ -33,13 +33,18 @@ namespace AppMovilAnuncios.ViewModels
         public event Action<SimonDice> BotonEncendido;
         public event Action Perdio;
         public event Action SumoPuntos;
+        public event Action GanoPuntos;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand VerPuntuacionCommand { get; set; }
+        public ICommand GanarPuntuacionCommand { get; set; }
         public SimonViewModel()
         {
-            CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-2533997797424491/1206545314");
+            CrossMTAdmob.Current.LoadInterstitial("ca-app-pub-3940256099942544/1033173712");
+            CrossMTAdmob.Current.LoadRewardedVideo("ca-app-pub-3940256099942544/5224354917");
+            CrossMTAdmob.Current.OnRewardedVideoAdClosed += Current_OnRewardedVideoAdClosed;
             VerPuntuacionCommand = new Command(VerPuntuaciones);
+            GanarPuntuacionCommand = new Command(GanarPuntuacion);
             ListaPuntuaciones.Clear();
             repository = new SimonRepository();
             var puntuaciones = repository.GetAll();
@@ -51,6 +56,20 @@ namespace AppMovilAnuncios.ViewModels
                 }
             }
         }
+
+        private void GanarPuntuacion(object obj)
+        {
+            if (CrossMTAdmob.Current.IsRewardedVideoLoaded())
+            {
+                CrossMTAdmob.Current.ShowRewardedVideo();
+            }
+        }
+
+        private void Current_OnRewardedVideoAdClosed(object sender, EventArgs e)
+        {
+            GanoPuntos?.Invoke();
+        }
+
         public void IniciarJuego()
         {
             secuencia.Clear();

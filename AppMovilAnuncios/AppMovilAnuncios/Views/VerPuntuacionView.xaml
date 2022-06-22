@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvm="clr-namespace:AppMovilAnuncios.ViewModels" xmlns:controls2="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
+             xmlns:mvvm="clr-namespace:AppMovilAnuncios.ViewModels" 
              x:Class="AppMovilAnuncios.Views.VerPuntuacionView" BackgroundColor="Black" Title="Tablero de puntuaciones">
     <StackLayout Margin="10">
         <CollectionView ItemsSource="{Binding ListaPuntuaciones}">
@@ -18,12 +18,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <controls2:MTAdView
-                 HeightRequest="60"
-                IsEnabled="True"
-                IsVisible="True"
-                x:Name="bannerAd"
-                AdsId="ca-app-pub-2533997797424491/1206545314">
-        </controls2:MTAdView>
     </StackLayout>
 </ContentPage>
